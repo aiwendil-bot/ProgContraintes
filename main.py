@@ -10,3 +10,9 @@ AllDifferent(q[i] + i for i in range(n)),
 # no two queens on the same downward diagonal
 AllDifferent(q[i] - i for i in range(n)))
 
+#Create an xml file containing the instance:
+#python .\Queens.py -data=100
+#Solve the instance:
+#java -jar .\ACE-21-04.jar .\Queens-100.xml
+#Create and solve the instance:
+#python .\Queens.py -data=100 -solve
