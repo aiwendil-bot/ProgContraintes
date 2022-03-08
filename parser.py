@@ -14,4 +14,4 @@ def parser(nomfic):
             print(sommet_succ)
             res[int(sommet_succ[0])].append(int(sommet_succ[1]))
             
-        res(res)    
+        return(res)
