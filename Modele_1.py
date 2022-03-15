@@ -11,12 +11,16 @@ n = len(graph)
 #i = len(DictS[x])
 #j = len(DictS[x])
 f = VarArray(size=n, dom=range(1,n+1))
+#f[0] = 1
 #print("    ")
 #print(f)
 
 satisfy(
     # Contrainte de
-    AllDifferent(f)
+    AllDifferent(f),
+    f[1] == 1,
+    f[2]<f[n-1]
+
 )
 
 minimize(
