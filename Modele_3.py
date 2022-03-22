@@ -55,4 +55,4 @@ for i in graph.keys():
         for j in range(0,n):
             for y in range(0,n):
                 if y != j:
-                    g.add_clause([-int(A[i][j]),-int(A[x][y]),possible(j,y,k,n)])
+                    g.add_clause([-int(A[i-1][j]),-int(A[x-1][y]),possible(j,y,k,n)])
