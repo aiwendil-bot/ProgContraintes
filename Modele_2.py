@@ -19,3 +19,4 @@ satisfy(
 )
 
 #python Modele_2.py -data=[Instances/didactic.mtx.rnd,10] -solve
+#python Modele_2.py -data=[Instances/ibm32.mtx.rnd,10] -solve
