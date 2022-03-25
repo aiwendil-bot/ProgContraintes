@@ -11,7 +11,6 @@ def parser(nomfic):
        
         for i in range(2,len(contenufic)):
             sommet_succ = contenufic[i].split()
-            print(sommet_succ)
             res[int(sommet_succ[0])].append(int(sommet_succ[1]))
             
         return(res)
