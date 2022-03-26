@@ -61,3 +61,13 @@ for i in graph.keys():
 print(g.solve())
 print(g.get_core())
 print(g.get_model())
+
+def solution_to_etiquetage(solution,n):
+    res = []
+    parcours = [k for k in range(1,n**2 +1)]
+    for i in parcours:
+        if solution[i] > 0:
+            res.append((i//n + 1,i%n + 1))
+    return res
+
+print(solution_to_etiquetage(g.get_model(),32))
