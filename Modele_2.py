@@ -35,6 +35,10 @@ def satisfiabilite_model2(filename,k):
         AllDifferent(f),
         [(f[u - 1], f[v - 1]) in possible for u in graph.keys() for v in graph[u]]
     )
+    print("k =",k)
+    print(solve())
     return solve() is SAT
+
+
 #python Modele_2.py -data=[Instances/didactic.mtx.rnd,10] -solve
 #python Modele_2.py -data=[Instances/ibm32.mtx.rnd,10] -solve
