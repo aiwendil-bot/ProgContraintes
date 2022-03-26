@@ -2,9 +2,9 @@ from pysat.solvers import Solver, Glucose3
 import parser
 import numpy as np
 
-k = 2
+k = 9
 
-graph = parser.parser('Instances/didactic.mtx.rnd')
+graph = parser.parser('Instances/ibm32.mtx.rnd')
 n = len(graph)
 #boolMatrix = np.zeros(2,2)
 
@@ -27,38 +27,36 @@ def possible(i,j,k,n):
     else:
         return (- (n**2 + 1))
 
-[int(A[i][j]) for j in range(0, n)]
 #contrainte 1
 # Minimum un vrai dans chaque lignes
 for i in range(0,n):
-    print([int(A[i][j]) for j in range(0, n)])
     g.add_clause([int(A[i][j]) for j in range(0, n)])
 
 # #contrainte 2
 # Maximum un vrai dans chaque lignes
 # for i in range(0,n):
 #     for j in range(0, n):
-#         for y in range(0, n):
-#             if y != j:
-#                 g.add_clause([-int(A[i][j]),-int(A[i][y])])
+#         for l in range(0, n):
+#             if l != j:
+#                 g.add_clause([-int(A[i][j]),-int(A[i][l])])
 
 #contrainte 3
 # Maximum un vrai dans chaque colonne
 for j in range(0,n):
     for i in range(0, n):
-        for x in range(0, n):
-            if x != i:
-                g.add_clause([-int(A[i][j]), -int(A[x][j])])
+        for k in range(0, n):
+            if k != i:
+                g.add_clause([-int(A[i][j]), -int(A[k][j])])
 
 
 #contrainte 4
 # Vérification de l'étiquetage possible pour chaque arêtes
 for i in graph.keys():
-    for x in graph[i]:
+    for kk in graph[i]:
         for j in range(1,n+1):
-            for y in range(1,n+1):
-                if y != j:
-                    g.add_clause([-int(A[i-1][j-1]),-int(A[x-1][y-1]),possible(j,y,k,n)])
+            for l in range(1,n+1):
+                if l != j:
+                    g.add_clause([-int(A[i-1][j-1]),-int(A[kk-1][l-1]),possible(j,l,k,n)])
 
 print(g.solve())
 print(g.get_core())
