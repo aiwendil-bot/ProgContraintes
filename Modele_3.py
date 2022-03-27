@@ -2,7 +2,7 @@ from pysat.solvers import Glucose4
 from parser import parser
 import numpy as np
 
-cyclic_bandwith = 15
+cyclic_bandwith = 9
 
 graph = parser('Instances/ibm32.mtx.rnd')
 n = len(graph)
@@ -20,7 +20,7 @@ g.add_clause([n**2 + 1])
 
 
 def possible(i, j):
-    return n ** 2 + 1 if min(abs(j - i), n - abs(j - i)) <= cyclic_bandwith & i != j else - (n ** 2 + 1)
+    return n ** 2 + 1 if min(abs(j - i), n - abs(j - i)) <= cyclic_bandwith else - (n ** 2 + 1)
 
 
 # contrainte 1
@@ -36,12 +36,12 @@ g.append_formula(contrainte1)
 # Maximum un vrai dans chaque ligne
 contrainte2 = []
 
-for i in range(n):
-    for j in range(n):
-        for l in range(n):
-            if l != j:
-                contrainte2.append([-int(A[i][j]), -int(A[i][l])])
-g.append_formula(contrainte2)
+#for i in range(n):
+ #   for j in range(n):
+  #      for l in range(n):
+   #         if l != j:
+    #            contrainte2.append([-int(A[i][j]), -int(A[i][l])])
+#g.append_formula(contrainte2)
 
 # contrainte 3
 # Maximum un vrai dans chaque colonne
