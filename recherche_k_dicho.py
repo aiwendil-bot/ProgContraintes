@@ -6,12 +6,10 @@ def recherche_dicho(filename):
     graph = parser(filename)
     degrees = [len(k) for k in graph.values()]
     inf = int(max(degrees) / 2)
-    print(inf)
     sup = int(len(graph) / 2)
     k = int(len(graph) / 4)
 
     while sup - inf > 2:
-        print(inf,sup)
         if satisfiabilite_model2(filename, k):
             sup = k
         else:

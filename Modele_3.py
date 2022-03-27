@@ -1,20 +1,22 @@
 from pysat.solvers import Glucose4
-import parser
+from parser import parser
 import numpy as np
 
 cyclic_bandwith = 15
 
-graph = parser.parser('Instances/ibm32.mtx.rnd')
+graph = parser('Instances/ibm32.mtx.rnd')
 n = len(graph)
 
-A = np.zeros((n, n), int)
+
+
+A = np.zeros((n+1, n+1), int)
 g = Glucose4()
 
-for i in range(n):
-    for j in range(n):
+for i in range(n+1):
+    for j in range(n+1):
         A[i][j] = i * n + j + 1
 
-g.add_clause([n ** 2 + 1])
+g.add_clause([n**2 + 1])
 
 
 def possible(i, j):
@@ -23,32 +25,46 @@ def possible(i, j):
 
 # contrainte 1
 # Minimum un vrai dans chaque ligne
+
+contrainte1 = []
 for i in range(n):
-    g.add_clause([int(A[i][j]) for j in range(n)])
+    contrainte1.append([int(A[i][j]) for j in range(n)])
+
+g.append_formula(contrainte1)
+
 # contrainte 2
 # Maximum un vrai dans chaque ligne
+contrainte2 = []
+
 for i in range(n):
     for j in range(n):
         for l in range(n):
             if l != j:
-                g.add_clause([-int(A[i][j]), -int(A[i][l])])
+                contrainte2.append([-int(A[i][j]), -int(A[i][l])])
+g.append_formula(contrainte2)
 
 # contrainte 3
 # Maximum un vrai dans chaque colonne
+contrainte3 = []
+
 for j in range(n):
     for i in range(n):
         for k in range(n):
             if k != i:
-                g.add_clause([-int(A[i][j]), -int(A[k][j])])
+                contrainte3.append([-int(A[i][j]), -int(A[k][j])])
 
+g.append_formula(contrainte3)
 # contrainte 4
 # Vérification de l'étiquetage possible pour chaque arête
+contrainte4 = []
+
 for i in graph.keys():
     for k in graph[i]:
         for j in range(1, n + 1):
             for l in range(1, n + 1):
                 if l != j:
-                    g.add_clause([-int(A[i - 1][j - 1]), -int(A[k - 1][l - 1]), possible(j, l)])
+                    contrainte4.append([-int(A[i - 1][j - 1]), -int(A[k - 1][l - 1]), possible(j, l)])
+g.append_formula(contrainte4)
 
 print(g.solve())
 print(g.get_model())
