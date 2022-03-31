@@ -1,30 +1,35 @@
 from pycsp3 import *
 import parser
 
-file = data
-graph = parser.parser(data)
 
-print(graph)
+def satisfiabilite_model1(filename,time):
+    clear()
 
-n = len(graph)
-#x = Var ({range (n)})
-#i = len(DictS[x])
-#j = len(DictS[x])
-f = VarArray(size=n, dom=range(1,n+1))
-#f[0] = 1
-#print("    ")
-#print(f)
+    graph = parser.parser(filename)
 
-satisfy(
-    # Contrainte de
-    AllDifferent(f),
-    f[1] == 1,
-    f[2]>f[n-1]
-)
+    #print(graph)
 
-minimize(
-    Maximum(Minimum(abs(f[i-1]-f[j-1]), n - abs(f[i-1] - f[j-1])) for i in graph.keys() for j in graph[i])
-)
+    n = len(graph)
+    #x = Var ({range (n)})
+    #i = len(DictS[x])
+    #j = len(DictS[x])
+    f = VarArray(size=n, dom=range(1,n+1))
+    #f[0] = 1
+    #print("    ")
+    #print(f)
+
+    satisfy(
+        # Contrainte de
+        AllDifferent(f),
+        f[1] == 1,
+        f[2]>f[n-1]
+    )
+
+    minimize(
+        Maximum(Minimum(abs(f[i-1]-f[j-1]), n - abs(f[i-1] - f[j-1])) for i in graph.keys() for j in graph[i])
+    )
+
+    return (solve(solver=ACE,verbose=0,options="-t="+time+"s")) is SAT
 
 
 # bcspwr01

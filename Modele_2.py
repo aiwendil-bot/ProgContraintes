@@ -18,7 +18,7 @@ import parser
 #   [(f[u-1],f[v-1]) in possible for u in graph.keys() for v in graph[u]]
 #)
 
-def satisfiabilite_model2(filename,k):
+def satisfiabilite_model2(filename,k,time):
     clear()
     graph = parser.parser(filename)
 
@@ -46,11 +46,11 @@ def satisfiabilite_model2(filename,k):
     #clear()
     # return result is SAT
     file = (filename.split("/")[1]).split(".")[0]
-    return (solve(solver=ACE,verbose=2,options="-t=10s,-output="+file+".xml")) is SAT
+    return (solve(solver=ACE,verbose=0,options="-t="+time+"s")) is SAT
 
 #print(satisfiabilite_model2("Instances/fs_680_1.mtx.rnd",680))
 #print(satisfiabilite_model2("Instances/ibm32.mtx.rnd",8))
-print(satisfiabilite_model2("Instances/west0132.mtx.rnd",66))
+#print(satisfiabilite_model2("Instances/west0132.mtx.rnd",66))
 
 #python Modele_2.py -data=[Instances/didactic.mtx.rnd,10] -solve
 #python Modele_2.py -data=[Instances/ibm32.mtx.rnd,10] -solve

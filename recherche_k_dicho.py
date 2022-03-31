@@ -2,7 +2,7 @@ from parser import parser
 from Modele_2 import satisfiabilite_model2
 
 
-def recherche_dicho(filename):
+def recherche_dicho(filename,time):
     graph = parser(filename)
     degrees = [len(k) for k in graph.values()]
     inf = int(max(degrees) / 2)
@@ -11,12 +11,12 @@ def recherche_dicho(filename):
 
     while sup - inf > 2:
         print(inf,sup)
-        if satisfiabilite_model2(filename, k):
+        if satisfiabilite_model2(filename, k,time):
             sup = k
         else:
             inf = k
         k = int((sup - inf) / 2) + inf
-    if satisfiabilite_model2(filename, k):
+    if satisfiabilite_model2(filename, k, time):
         return k
     else:
         return sup
