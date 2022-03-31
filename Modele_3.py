@@ -16,7 +16,10 @@ for i in range(n+1):
     for j in range(n+1):
         A[i][j] = i * n + j + 1
 
+
+A[0][0]=1
 g.add_clause([n**2 + 1])
+
 
 
 def possible(i, j):
@@ -34,7 +37,7 @@ g.append_formula(contrainte1)
 
 # contrainte 2
 # Maximum un vrai dans chaque ligne
-contrainte2 = []
+#contrainte2 = []
 
 #for i in range(n):
  #   for j in range(n):

@@ -22,4 +22,4 @@ def recherche_dicho(filename):
         return sup
 
 
-print(recherche_dicho("Instances/ibm32.mtx.rnd"))
+#print(recherche_dicho("Instances/ibm32.mtx.rnd"))
