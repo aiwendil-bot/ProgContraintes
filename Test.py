@@ -16,6 +16,7 @@ files = os.listdir("Instances")
 os.remove("results.csv")
 fichier = open("results.csv", "x")
 writer = csv.writer(fichier)
+writer.writerow(["Instance", "nb sommet", "nb Aretes", "tempsM1", "tempsM2", "tempsM3"])
 
 for filename in files:
     file = open("Instances/"+filename, "r")
@@ -44,7 +45,7 @@ for filename in files:
         satisfiabilite_model3("Instances/"+filename,int((int(string[1])+1)/2),"180")
         end_time = time.time()
         tempsM3 = end_time - start_time
-        writer.writerow([filename , tempsM1, tempsM2, tempsM3 ])
+        writer.writerow([filename ,string[1],string[2], tempsM1, tempsM2, tempsM3 ])
 
 fichier.close()
 
