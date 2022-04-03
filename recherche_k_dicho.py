@@ -7,15 +7,15 @@ def recherche_dicho(filename,time):
     graph = parser(filename)
     degrees = [len(k) for k in graph.values()]
     inf = ceil(max(degrees) / 2)
-    sup = int(len(graph) / 2)
-    k = int(len(graph) / 4)
+    sup = floor(len(graph) / 2)
+    k = floor((sup + inf)/2)
 
     while sup - inf > 2:
         if satisfiabilite_model2(filename, k,time):
             sup = k
         else:
             inf = k
-        k = int((sup - inf) / 2) + inf
+        k = floor((sup - inf) / 2) + inf
     if satisfiabilite_model2(filename, k, time):
         return k
     else:
