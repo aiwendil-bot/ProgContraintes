@@ -11,7 +11,6 @@ def recherche_dicho(filename,time):
     k = int(len(graph) / 4)
 
     while sup - inf > 2:
-        print(inf, sup)
         if satisfiabilite_model2(filename, k,time):
             sup = k
         else:
